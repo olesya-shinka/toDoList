@@ -8,6 +8,7 @@ import { MdNotificationImportant } from "react-icons/md";
 import { MdIncompleteCircle } from "react-icons/md";
 import { MdDoneOutline } from "react-icons/md";
 import { usePathname, useRouter } from "next/navigation";
+import { PiSignOutBold } from "react-icons/pi";
 
 function Sidebar() {
   const router = useRouter();
@@ -49,6 +50,9 @@ function Sidebar() {
           </Link>
         </li>
       </ul>
+      <button className="sign-out">
+        <PiSignOutBold />
+      </button>
     </Styles>
   );
 }
@@ -56,6 +60,7 @@ const Styles = styled.nav`
   background-color: grey;
   position: relative;
   width: 200px;
+  height: 300px;
   border: 1px solid;
   border-radius: 1rem;
   box-shadow: 3px 2px 5px darkgrey;
@@ -73,7 +78,7 @@ const Styles = styled.nav`
     font-weight: 400;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 20px;
   }
 
   .profile-above {
@@ -82,7 +87,26 @@ const Styles = styled.nav`
     left: 0;
     width: 100%;
     height: 100%;
-    backdpop-filter: blur(10px);
+  }
+  h2 {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sidebar-items {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 50px;
+    transition: all 0.5s ease;
+  }
+
+  .sidebar-item {
+    transform: scale(1.5);
+  }
+
+  .sign-out {
+    transform: scale(1.5);
+    margin-bottom: 20px;
   }
 `;
 
