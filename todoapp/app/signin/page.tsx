@@ -1,8 +1,7 @@
 "use client";
 import { SignIn } from "@clerk/nextjs";
-import React from "react";
 
-function Signin() {
+function page() {
   return (
     <div>
       <SignIn />
@@ -10,4 +9,4 @@ function Signin() {
   );
 }
 
-export default Signin;
+export default page;

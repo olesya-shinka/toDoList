@@ -7,7 +7,7 @@ export const GlobalUpdateContext = createContext();
 export const GlobalProvider = ({ children }) => {
   return (
     <GlobalContext.Provider>
-      <GlobalUpdateContext.Provider value={{}}>
+      <GlobalUpdateContext.Provider>
         {children}
       </GlobalUpdateContext.Provider>
     </GlobalContext.Provider>
