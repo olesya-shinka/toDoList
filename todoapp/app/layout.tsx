@@ -23,7 +23,7 @@ export default function RootLayout({
         <Context>
           <GlobalStyles>
             <Sidebar />
-            {children}
+            <div className="all">{children}</div>
           </GlobalStyles>
         </Context>
       </body>
