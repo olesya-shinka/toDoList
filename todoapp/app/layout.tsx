@@ -19,6 +19,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const { userId } = auth();
+
   return (
     <ClerkProvider>
       <html lang="en">

@@ -1,8 +1,13 @@
 "use client";
+import { SignUp } from "@clerk/nextjs";
 import React from "react";
 
-function SignUp() {
-  return <div>SignUp</div>;
+function Signup() {
+  return (
+    <div>
+      <SignUp />
+    </div>
+  );
 }
 
-export default SignUp;
+export default Signup;
