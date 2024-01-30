@@ -1,7 +1,5 @@
-import Image from "next/image";
+import AllTasks from "./pages/alltasks";
 
 export default function Home() {
-  return <main>
-    <h1>Home</h1>
-  </main>;
+  return <AllTasks />;
 }

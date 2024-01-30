@@ -65,6 +65,7 @@ const Styles = styled.nav`
   border-radius: 1rem;
   box-shadow: 3px 2px 5px darkgrey;
   display: flex;
+  flex-wrap: wrap;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
