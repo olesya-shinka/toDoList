@@ -1,8 +1,8 @@
 "use client";
 import React from "react";
 
-function Incomplete() {
+function page() {
   return <div>Incomplete</div>;
 }
 
-export default Incomplete;
+export default page;

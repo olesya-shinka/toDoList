@@ -1,5 +1,5 @@
-import AllTasks from "./components/elementsPages/alltasks";
+import Todos from "./components/Todos/Todos";
 
 export default function Home() {
-  return <AllTasks />;
+  return <Todos />;
 }

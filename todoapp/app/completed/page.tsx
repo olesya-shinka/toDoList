@@ -1,8 +1,8 @@
 "use client";
 import React from "react";
 
-function Completed() {
+function page() {
   return <div>Completed</div>;
 }
 
-export default Completed;
+export default page;
