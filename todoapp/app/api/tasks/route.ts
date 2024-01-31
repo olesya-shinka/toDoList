@@ -77,3 +77,26 @@ export async function PutTask(req: Request) {
         return NextResponse.json({ error: "Ошибка обновления задачи", status: 500 });
     }
 }
+
+export async function DeleteTask(
+    req: Request,
+    { params }: { params: { id: string } }
+) {
+    try {
+        const { userId } = auth();
+        const { id } = params;
+        if (!userId) {
+            return new NextResponse("Unauthorized", { status: 401 });
+        }
+        const task = await prisma.task.delete({
+            where: {
+                id,
+            },
+        });
+
+        return NextResponse.json(task);
+    } catch (error) {
+        console.log("Ошибка удаления задачи: ", error);
+        return NextResponse.json({ error: "Ошибка при удалении", status: 500 });
+    }
+}
