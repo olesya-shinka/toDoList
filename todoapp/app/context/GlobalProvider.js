@@ -1,12 +1,19 @@
 "use client";
+import axios from "axios";
 import React, { createContext, useContext, useState } from "react";
 
 export const GlobalContext = createContext();
 export const GlobalUpdateContext = createContext();
 
 export const GlobalProvider = ({ children }) => {
-  const [globalState, setGlobalState] = useState();
-  const state = [globalState];
+  const [isLoading, setIsLoading] = useState(false);
+  const [tasks, setTasks] = useState([]);
+  const allTasks = async () => {
+    setIsLoading(true);
+    try {
+      const res = await axios.get("api/tasks");
+    } catch (error) {}
+  };
   return (
     <GlobalContext.Provider value={state}>
       <GlobalUpdateContext.Provider value={{}}>
