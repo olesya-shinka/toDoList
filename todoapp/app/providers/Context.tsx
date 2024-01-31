@@ -1,12 +1,12 @@
 "use client";
 import React, { useState } from "react";
-import { GlobalProvider } from "../components/Context/GlobalProvider";
+import { GlobalProvider } from "../context/GlobalProvider";
 
 interface Props {
   children: React.ReactNode;
 }
 
-function Context({ children }: Props) {
+function ContextProvider({ children }: Props) {
   const [isReady, setIsReady] = useState(false);
 
   React.useEffect(() => {
@@ -22,4 +22,4 @@ function Context({ children }: Props) {
   return <GlobalProvider>{children}</GlobalProvider>;
 }
 
-export default Context;
+export default ContextProvider;

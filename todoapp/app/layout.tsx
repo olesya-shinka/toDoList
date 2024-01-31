@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Sidebar from "./components/Sidebar/Sidebar";
 import GlobalStyles from "./providers/GlobalStyles";
-import Context from "./providers/Context";
+import ContextProvider from "./providers/Context";
 import { ClerkProvider, auth } from "@clerk/nextjs";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -24,12 +24,12 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body className={inter.className}>
-          <Context>
+          <ContextProvider>
             <GlobalStyles>
               {userId && <Sidebar />}
               <div className="all">{children}</div>
             </GlobalStyles>
-          </Context>
+          </ContextProvider>
         </body>
       </html>
     </ClerkProvider>

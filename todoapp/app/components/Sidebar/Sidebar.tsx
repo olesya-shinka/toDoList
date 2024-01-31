@@ -2,6 +2,7 @@
 import React from "react";
 import styled from "styled-components";
 import Link from "next/link";
+import { useGlobalState } from "../../context/GlobalProvider";
 import { CgProfile } from "react-icons/cg";
 import { CiHome } from "react-icons/ci";
 import { MdNotificationImportant } from "react-icons/md";
@@ -16,10 +17,12 @@ function Sidebar() {
     router.push(link);
   };
 
+  const { state } = useGlobalState();
+
   const selectedName = usePathname();
 
   return (
-    <Styles>
+    <Styles state={state}>
       <div className="profile">
         <div className="profile-above"></div>
         <CgProfile />
