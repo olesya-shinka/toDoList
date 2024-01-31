@@ -11,8 +11,20 @@ export const GlobalProvider = ({ children }) => {
   const allTasks = async () => {
     setIsLoading(true);
     try {
-      const res = await axios.get("api/tasks");
-    } catch (error) {}
+      const res = await axios.get("/api/tasks");
+
+      const sorted = res.data.sort((a, b) => {
+        return (
+          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+        );
+      });
+
+      setTasks(sorted);
+
+      setIsLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <GlobalContext.Provider value={state}>
