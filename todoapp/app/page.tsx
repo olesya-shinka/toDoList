@@ -1,7 +1,9 @@
-import Todos from "./components/Todos/Todos";
-import { useGlobalState } from "./context/GlobalProvider";
+"use client";
+import Todos from './Components/Todos/Todos'
+import { useGlobalState } from "./context/globalProvider";
 
 export default function Home() {
-  const { todos } = useGlobalState();
-  return <Todos />;
+  const { tasks } = useGlobalState();
+
+  return <Todos title="All Tasks" tasks={tasks} />;
 }
