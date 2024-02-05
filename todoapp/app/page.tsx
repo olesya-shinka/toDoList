@@ -5,5 +5,5 @@ import { useGlobalState } from "./context/globalProvider";
 export default function Home() {
   const { tasks } = useGlobalState();
 
-  return <Todos title="All Tasks" tasks={tasks} />;
+  return <Todos title="Все задачи" tasks={tasks} />;
 }
