@@ -1,18 +1,21 @@
 "use client";
-import React from "react";
-import styled from "styled-components";
+import React, { useState } from "react";
+import { styled, StyleSheetManager, ServerStyleSheet } from "styled-components";
 import { useGlobalState } from "@/app/context/globalProvider";
 import Image from "next/image";
+import isPropValid from "@emotion/is-prop-valid";
 
 import nav from "@/app/utils/nav";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter, useServerInsertedHTML } from "next/navigation";
 import Button from "../Button/Button";
 import { arrowLeft, bars, logout } from "@/app/utils/Icons";
 import { UserButton, useClerk, useUser } from "@clerk/nextjs";
 
 function Sidebar() {
-  const { theme, collapsed, collapseMenu } = useGlobalState();
+  let { theme, collapsed, collapseMenu } = useGlobalState();
+  const [styledComponentsStyleSheet] = useState(() => new ServerStyleSheet());
+  collapsed = "false";
   const { signOut } = useClerk();
 
   const { user } = useUser();
@@ -30,55 +33,67 @@ function Sidebar() {
     router.push(link);
   };
 
+  useServerInsertedHTML(() => {
+    const styles = styledComponentsStyleSheet.getStyleElement();
+    styledComponentsStyleSheet.instance.clearTag();
+    return <>{styles}</>;
+  });
+
   return (
-    <Styled theme={theme} collapsed={collapsed}>
-      <button className="toggle-nav" onClick={collapseMenu}>
-        {collapsed ? bars : arrowLeft}
-      </button>
-      <div className="profile">
-        <div className="profile-overlay"></div>
-        <div className="image">
-          <Image width={70} height={70} src={imageUrl} alt="profile" />
+    <StyleSheetManager
+      // enableVendorPrefixes
+      // sheet={styledComponentsStyleSheet.instance}
+      shouldForwardProp={() => true}
+    >
+      <Styled theme={theme} collapsed={collapsed}>
+        <button className="toggle-nav" onClick={collapseMenu}>
+          {collapsed ? bars : arrowLeft}
+        </button>
+        <div className="profile">
+          <div className="profile-overlay"></div>
+          <div className="image">
+            <Image width={70} height={70} src={imageUrl} alt="profile" />
+          </div>
+          <div className="user-btn absolute z-20 top-0 w-full h-full">
+            <UserButton />
+          </div>
+          <h1 className="capitalize">
+            {firstName} {lastName}
+          </h1>
         </div>
-        <div className="user-btn absolute z-20 top-0 w-full h-full">
-          <UserButton />
+        <ul className="nav-items">
+          {nav.map((item) => {
+            const link = item.link;
+            return (
+              <li
+                key={item.id}
+                className={`nav-item ${pathname === link ? "active" : ""}`}
+                onClick={() => {
+                  handleClick(link);
+                }}
+              >
+                {item.icon}
+                <Link href={link}>{item.title}</Link>
+              </li>
+            );
+          })}
+        </ul>
+        <div className="sign-out relative m-6">
+          <Button
+            name={"Выйти"}
+            type={"submit"}
+            padding={"0.4rem 0.8rem"}
+            borderRad={"0.8rem"}
+            fw={"500"}
+            fs={"1.2rem"}
+            icon={logout}
+            click={() => {
+              signOut(() => router.push("/signin"));
+            }}
+          />
         </div>
-        <h1 className="capitalize">
-          {firstName} {lastName}
-        </h1>
-      </div>
-      <ul className="nav-items">
-        {nav.map((item) => {
-          const link = item.link;
-          return (
-            <li
-              key={item.id}
-              className={`nav-item ${pathname === link ? "active" : ""}`}
-              onClick={() => {
-                handleClick(link);
-              }}
-            >
-              {item.icon}
-              <Link href={link}>{item.title}</Link>
-            </li>
-          );
-        })}
-      </ul>
-      <div className="sign-out relative m-6">
-        <Button
-          name={"Выйти"}
-          type={"submit"}
-          padding={"0.4rem 0.8rem"}
-          borderRad={"0.8rem"}
-          fw={"500"}
-          fs={"1.2rem"}
-          icon={logout}
-          click={() => {
-            signOut(() => router.push("/signin"));
-          }}
-        />
-      </div>
-    </Styled>
+      </Styled>
+    </StyleSheetManager>
   );
 }
 
@@ -101,8 +116,8 @@ const Styled = styled.nav<{ collapsed: boolean }>`
     z-index: 100;
 
     transition: all 0.3s cubic-bezier(0.53, 0.21, 0, 1);
-    transform: ${(props) =>
-      props.collapsed ? "translateX(-107%)" : "translateX(0)"};
+    transform: ${({ collapsed }) =>
+      collapsed ? "translateX(-107%)" : "translateX(0)"};
 
     .toggle-nav {
       display: block !important;

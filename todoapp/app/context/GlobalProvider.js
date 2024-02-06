@@ -14,7 +14,8 @@ export const GlobalProvider = ({ children }) => {
   const [selectedTheme, setSelectedTheme] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [modal, setModal] = useState(false);
-  const [collapsed, setCollapsed] = useState(false);
+  let [collapsed, setCollapsed] = useState(false);
+  collapsed = "false";
 
   const [tasks, setTasks] = useState([]);
 

@@ -37,7 +37,7 @@ export default function RootLayout({
 
   return (
     <ClerkProvider>
-      <html lang="en">
+      <html lang="ru">
         <head>
           <link
             rel="stylesheet"
@@ -55,7 +55,7 @@ export default function RootLayout({
           />
           <ContextProvider>
             <GlobalStyleProvider>
-              <Sidebar />
+              {userId && <Sidebar />}
               <div className="w-full">{children}</div>
             </GlobalStyleProvider>
           </ContextProvider>
