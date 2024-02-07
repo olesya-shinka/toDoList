@@ -82,7 +82,7 @@ function AddContent() {
         />
       </div>
       <div className="input-control">
-        <label htmlFor="description">Description</label>
+        <label htmlFor="description">Описание</label>
         <textarea
           value={description}
           onChange={handleChange("description")}
@@ -93,7 +93,7 @@ function AddContent() {
         ></textarea>
       </div>
       <div className="input-control">
-        <label htmlFor="date">Date</label>
+        <label htmlFor="date">Дата</label>
         <input
           value={date}
           onChange={handleChange("date")}

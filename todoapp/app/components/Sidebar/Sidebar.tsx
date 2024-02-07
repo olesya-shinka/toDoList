@@ -15,7 +15,7 @@ import { UserButton, useClerk, useUser } from "@clerk/nextjs";
 function Sidebar() {
   let { theme, collapsed, collapseMenu } = useGlobalState();
   const [styledComponentsStyleSheet] = useState(() => new ServerStyleSheet());
-  collapsed = "false";
+  // collapsed = "false";
   const { signOut } = useClerk();
 
   const { user } = useUser();
@@ -289,19 +289,6 @@ const Styled = styled.nav<{ collapsed: boolean }>`
         width: 100%;
       }
     }
-  }
-
-  .active {
-    background-color: ${(props) => props.theme.activeNavLink};
-
-    i,
-    a {
-      color: ${(props) => props.theme.colorIcons2};
-    }
-  }
-
-  .active::before {
-    width: 0.3rem;
   }
 
   > button {
